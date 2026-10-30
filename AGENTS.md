@@ -18,4 +18,4 @@ This repository is a shared entry point for agent-assisted work across BinBop, i
 
 ## Repository template
 
-For repository setup or maintenance, inspect the sibling `template` repository. New repositories can be created from its GitHub template; existing repositories may adopt its practices without being recreated. Compare starting files and guidance with the target repository, adapt what fits, and preserve its own content. Do not imply that a repository was created from the template unless GitHub records that association. See `handbook/repository-practices.md` for the shared approach.
+For repository setup or maintenance, inspect the sibling `template` repository. Create new GitHub repositories from the BinBop template by default, then verify GitHub records the association. Customize starting files for the repository. When maintaining an existing repository, compare its practices with the template, adapt what fits, and preserve its own content. Do not imply that a repository was created from the template unless GitHub records that association. See `handbook/repository-practices.md` for the shared approach.
