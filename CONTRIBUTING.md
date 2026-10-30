@@ -2,11 +2,11 @@
 
 ## Working here
 
-Describe how to make changes, including any setup, tools, or repository-specific practices that matter. Link to relevant documentation rather than repeating it.
+Keep shared guidance concise, actionable, and applicable across BinBop. Put information specific to a repository with that repository unless it is needed to navigate the workspace. Avoid copying handbook content or introducing tools and processes without a clear need.
 
 ## Checking changes
 
-Describe how to check changes before sharing them. Include commands where appropriate; for non-code work, describe any useful review or verification steps.
+Check that instructions match the actual setup, links resolve, and examples work. Consider how guidance applies to both technical and non-technical work.
 
 ## Sharing changes
 
@@ -14,4 +14,4 @@ Use clear, concise commit and pull request titles that describe the change, such
 
 ## Shared guidance
 
-The [handbook](https://github.com/BinBopHQ/handbook) contains BinBop's product and working practices. For agent-assisted work, consult the shared guidance in the `agents` repository when available.
+The [handbook](https://github.com/BinBopHQ/handbook) contains BinBop's product and working practices.
