@@ -15,3 +15,7 @@ This repository is a shared entry point for agent-assisted work across BinBop, i
 - Use the repository's existing tools and conventions where appropriate. Check results with methods that fit the work; explain what was and was not verified.
 - Use clear, concise descriptions for commits and pull requests. Follow any repository-specific contribution instructions.
 - Put durable business decisions in the handbook and repository-specific work in the repository that owns it. Avoid duplicating guidance that has a clear home elsewhere.
+
+## Repository template
+
+For repository setup or maintenance, inspect the sibling `template` repository. New repositories can be created from its GitHub template; existing repositories may adopt its practices without being recreated. Compare starting files and guidance with the target repository, adapt what fits, and preserve its own content. Do not imply that a repository was created from the template unless GitHub records that association. See `handbook/repository-practices.md` for the shared approach.
