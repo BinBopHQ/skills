@@ -4,7 +4,7 @@ Reusable agent skills and supporting tools for work across BinBop.
 
 ## Getting started
 
-The [writing prototype](WRITING.md) checks drafts and includes a skill for agents. It is still being evaluated and does not yet replace product's writing checks.
+The [writing checker](WRITING.md) checks drafts and repositories. It includes a skill for agents.
 
 The `handbook` repository describes BinBop's product and working practices, including Ready, Set, Go. Each repository's README and CONTRIBUTING.md explain its own purpose and how to work there.
 
