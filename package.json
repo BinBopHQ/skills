@@ -1,10 +1,10 @@
 {
-  "name": "@binbop/writing",
+  "name": "@binbop/lint-writing",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@12.16.1",
-  "bin": { "writing": "bin/writing.mjs" },
+  "bin": { "lint-writing": "bin/lint-writing.mjs" },
   "scripts": { "test": "node --test test/*.test.mjs" },
   "dependencies": { "writehuman": "0.1.0" }
 }

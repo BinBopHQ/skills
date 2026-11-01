@@ -2,31 +2,31 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 
-const cli = new URL('../bin/writing.mjs', import.meta.url);
+const cli = new URL('../bin/lint-writing.mjs', import.meta.url);
 function check(args, input) {
   return spawnSync(process.execPath, [cli.pathname, ...args], { encoding: 'utf8', input });
 }
 
 test('checks a plain-text draft from stdin', () => {
-  const result = check(['check', '--stdin'], 'Thanks for your help. I will send the details tomorrow.\n');
+  const result = check(['--stdin'], 'Thanks for your help. I will send the details tomorrow.\n');
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /writehuman: .* \/ 133\.2/);
 });
 
 test('fails on a Vale error and an excessive score', () => {
-  const result = check(['check', '--stdin'], 'A revolutionary, game-changing breakthrough.\n');
+  const result = check(['--stdin'], 'A revolutionary, game-changing breakthrough.\n');
   assert.equal(result.status, 1, result.stderr);
   assert.match(result.stdout, /BinBop\.Hype/);
   assert.match(result.stdout, /writehuman:/);
 });
 
 test('reports a missing file as a tool failure', () => {
-  const result = check(['check', '/no-such-binbop-file.md']);
+  const result = check(['/no-such-binbop-file.md']);
   assert.equal(result.status, 2);
 });
 
 test('does not apply marketplace terminology to general writing', () => {
-  const result = check(['check', '--stdin'], 'The auction lot has a lot number.\n');
+  const result = check(['--stdin'], 'The auction lot has a lot number.\n');
   assert.notEqual(result.status, 2, result.stderr);
   assert.doesNotMatch(result.stdout, /BinBop\.ListingTerms|inventory reference/);
 });

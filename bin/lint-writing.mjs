@@ -7,8 +7,8 @@ import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
-if (args.length !== 2 || args[0] !== 'check' || (args[1] !== '--stdin' && !['.md', '.txt'].includes(extname(args[1]).toLowerCase()))) {
-  console.error('Usage: writing check <file.md|file.txt|--stdin>');
+if (args.length !== 1 || (args[0] !== '--stdin' && !['.md', '.txt'].includes(extname(args[0]).toLowerCase()))) {
+  console.error('Usage: lint-writing <file.md|file.txt|--stdin>');
   process.exit(2);
 }
 
@@ -25,8 +25,8 @@ function run(command, commandArgs) {
 }
 
 try {
-  const isStdin = args[1] === '--stdin';
-  const source = isStdin ? join(temp, 'draft.txt') : resolve(args[1]);
+  const isStdin = args[0] === '--stdin';
+  const source = isStdin ? join(temp, 'draft.txt') : resolve(args[0]);
   if (isStdin) writeFileSync(source, readFileSync(0), { mode: 0o600 });
   const config = join(temp, '.vale.ini');
   writeFileSync(config, `StylesPath = ${join(root, 'styles')}\nMinAlertLevel = suggestion\n\n[*.{md,txt}]\nBasedOnStyles = BinBop\n`, { mode: 0o600 });
@@ -51,7 +51,7 @@ try {
   if (findings.length > 20) console.log(`  ... and ${findings.length - 20} more findings.`);
   if (vale.status === 1 || report.score > 133.2) process.exitCode = 1;
 } catch (error) {
-  console.error(`writing: ${error.message}`);
+  console.error(`lint-writing: ${error.message}`);
   process.exitCode = 2;
 } finally {
   rmSync(temp, { recursive: true, force: true });
