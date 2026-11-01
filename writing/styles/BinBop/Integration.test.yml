@@ -1,0 +1,12 @@
+- name: checks prose in the Markdown configuration
+  input: This is a revolutionary experience.
+  contains: BinBop.Hype
+
+- name: checks prose in the HTML configuration
+  format: html
+  input: '<p>This is a revolutionary experience.</p>'
+  contains: BinBop.Hype
+
+- name: ignores quoted code in a Markdown document
+  input: 'Run `revolutionary` to test the command.'
+  absent: BinBop.Hype

@@ -1,0 +1,9 @@
+{
+  "name": "@binbop/writing",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": { "writing": "bin/writing.mjs" },
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "dependencies": { "writehuman": "0.1.0" }
+}

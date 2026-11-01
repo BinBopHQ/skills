@@ -1,0 +1,30 @@
+extends: existence
+message: "Replace '%s' with a specific, supportable statement."
+level: error
+ignorecase: true
+tokens:
+  - 'game[- ]chang(?:ing|er)'
+  - revolutionary
+  - groundbreaking
+  - 'best[- ]in[- ]class'
+  - 'world[- ]class'
+  - 'cutting[- ]edge'
+  - 'next[- ]generation'
+  - frictionless
+  - 'seamless(?:ly)?'
+  - 'supercharg(?:e|es|ed|ing)'
+  - 'delv(?:e|es|ed|ing)'
+  - at the end of the day
+  - "in today's fast[- ]paced world"
+tests:
+  - name: flags vague claims and stock phrases
+    input: This game-changing feature works seamlessly.
+    contains:
+      - game-changing
+      - seamlessly
+  - name: leaves code examples alone
+    input: 'Run `seamless` to start the tool.'
+    want: ''
+  - name: allows a specific claim
+    input: The listing page loads in under two seconds in this test.
+    want: ''

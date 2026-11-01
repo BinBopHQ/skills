@@ -1,0 +1,24 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      writehuman:
+        specifier: 0.1.0
+        version: 0.1.0
+
+packages:
+
+  writehuman@0.1.0:
+    resolution: {integrity: sha512-IkRrNyG8WYA3i2tTrX6U2AktyZU/lz9vsVZ0NM2Gt/Rkizwi5Dx0UpkVPM92eYHOTu18kK4aHLzB7YJ7s60ppQ==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+snapshots:
+
+  writehuman@0.1.0: {}

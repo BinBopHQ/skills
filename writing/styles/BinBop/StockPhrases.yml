@@ -1,0 +1,20 @@
+extends: existence
+message: "Consider replacing '%s' with the specific point."
+level: warning
+scope: sentence
+ignorecase: true
+tokens:
+  - "(?:it['’]s|this is) not .{1,80}(?:it['’]s|this is)"
+  - "we['’]re excited to announce"
+  - say goodbye to
+  - unlock the power of
+tests:
+  - name: flags a stock contrast
+    input: "It's not a store; it's a journey."
+    contains: BinBop.StockPhrases
+  - name: flags stock announcements
+    input: "We're excited to announce a change."
+    contains: BinBop.StockPhrases
+  - name: allows a useful negative statement
+    input: The listing is not available.
+    want: ''

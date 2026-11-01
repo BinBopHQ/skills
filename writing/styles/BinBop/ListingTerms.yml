@@ -1,0 +1,16 @@
+extends: existence
+message: "Consider 'listing' or 'inventory reference' instead of '%s' when referring to BinBop inventory."
+level: warning
+ignorecase: true
+tokens:
+  - lot number
+  - auction lot
+tests:
+  - name: flags marketplace terms for review
+    input: Enter the lot number for this auction lot.
+    contains:
+      - lot number
+      - auction lot
+  - name: allows the ordinary word
+    input: A lot of shoppers saved this listing.
+    want: ''

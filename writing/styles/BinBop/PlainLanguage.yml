@@ -1,0 +1,21 @@
+extends: substitution
+message: "Consider '%s' instead of '%s'."
+level: warning
+ignorecase: true
+swap:
+  utilize: use
+  utilizes: uses
+  utilized: used
+  utilizing: using
+  in order to: to
+  due to the fact that: because
+  at this point in time: now
+tests:
+  - name: suggests familiar words
+    input: Utilize the filter in order to find a listing.
+    contains:
+      - Utilize
+      - in order to
+  - name: leaves clear language alone
+    input: Use the filter to find a listing.
+    want: ''
