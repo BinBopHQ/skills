@@ -7,8 +7,12 @@ import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
+if (args.length === 1 && args[0] === '--repo') {
+  await import('./check-repo.mjs');
+  process.exit();
+}
 if (args.length !== 1 || (args[0] !== '--stdin' && !['.md', '.txt'].includes(extname(args[0]).toLowerCase()))) {
-  console.error('Usage: lint-writing <file.md|file.txt|--stdin>');
+  console.error('Usage: lint-writing <file.md|file.txt|--stdin|--repo>');
   process.exit(2);
 }
 
