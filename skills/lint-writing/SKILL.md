@@ -1,6 +1,6 @@
 ---
-name: writing
-description: Write, review, or revise prose for BinBop, including documentation, issues, messages, and email drafts. Use when preparing substantial writing or when asked to check prose.
+name: lint-writing
+description: Check and revise writing for BinBop, including documentation, issues, messages, and email drafts. Use when asked to check writing or after drafting substantial text.
 ---
 
 Write for the reader and purpose. Be clear and specific. Preserve the author's meaning, facts, voice, and useful formatting.
