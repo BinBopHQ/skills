@@ -4,7 +4,22 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@12.16.1",
-  "bin": { "lint-writing": "bin/lint-writing.mjs" },
-  "scripts": { "test": "node --test test/*.test.mjs" },
-  "dependencies": { "markdownlint-cli2": "0.24.0", "writehuman": "0.1.0" }
+  "bin": {
+    "lint-writing": "bin/lint-writing.mjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "markdownlint-cli2": "0.24.0",
+    "writehuman": "0.1.0"
+  },
+  "optionalDependencies": {
+    "@taskless/vale-darwin-arm64": "3.25.1-20261028215110",
+    "@taskless/vale-darwin-x64": "3.25.1-20261028215110",
+    "@taskless/vale-linux-arm64": "3.25.1-20261028215110",
+    "@taskless/vale-linux-x64": "3.25.1-20261028215110",
+    "@taskless/vale-win32-arm64": "3.25.1-20261028215110",
+    "@taskless/vale-win32-x64": "3.25.1-20261028215110"
+  }
 }

@@ -11,10 +11,10 @@ tokens:
 tests:
   - name: flags a stock contrast
     input: "It's not a store; it's a journey."
-    contains: BinBop.StockPhrases
+    contains: Writing.StockPhrases
   - name: flags stock announcements
     input: "We're excited to announce a change."
-    contains: BinBop.StockPhrases
+    contains: Writing.StockPhrases
   - name: allows a useful negative statement
     input: The listing is not available.
     want: ''

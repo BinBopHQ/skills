@@ -14,6 +14,25 @@ importers:
       writehuman:
         specifier: 0.1.0
         version: 0.1.0
+    optionalDependencies:
+      '@taskless/vale-darwin-arm64':
+        specifier: 3.25.1-20261028215110
+        version: 3.25.1-20261028215110
+      '@taskless/vale-darwin-x64':
+        specifier: 3.25.1-20261028215110
+        version: 3.25.1-20261028215110
+      '@taskless/vale-linux-arm64':
+        specifier: 3.25.1-20261028215110
+        version: 3.25.1-20261028215110
+      '@taskless/vale-linux-x64':
+        specifier: 3.25.1-20261028215110
+        version: 3.25.1-20261028215110
+      '@taskless/vale-win32-arm64':
+        specifier: 3.25.1-20261028215110
+        version: 3.25.1-20261028215110
+      '@taskless/vale-win32-x64':
+        specifier: 3.25.1-20261028215110
+        version: 3.25.1-20261028215110
 
 packages:
 
@@ -32,6 +51,36 @@ packages:
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
+
+  '@taskless/vale-darwin-arm64@3.25.1-20261028215110':
+    resolution: {integrity: sha512-1G1dZ7ZPJr9iIbnhGvyXiHIwugyLqya6ZtsF5xUH/2ASMo3HKRaBaqZji03AxldGhmQ6nMXz0LNdQAlIJhadHQ==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@taskless/vale-darwin-x64@3.25.1-20261028215110':
+    resolution: {integrity: sha512-CCyJNMleud69Z0/vwfUcQsKDMw/zANw8cJY50wSmPRg8xchhpCM4NJXOqg2cymCIhBfKog8oH/T1DWHWmlftPg==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@taskless/vale-linux-arm64@3.25.1-20261028215110':
+    resolution: {integrity: sha512-rj6XlcHXRdPeQmmb8aPOyXHc4NTU6/r4kwGD7uDWLly2nhlpa6ZrYUEjEWLpU2jIrRonjN0DDmpQkQmYbkBPxg==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@taskless/vale-linux-x64@3.25.1-20261028215110':
+    resolution: {integrity: sha512-BGhV3FfZWa+UnRWvnbaUm+lN6msAXXNPt7IbsNTufTKQ7+5gPXCk6Scu3j39jjy4zi95+vHD4ZksU/rokoNkWw==}
+    cpu: [x64]
+    os: [linux]
+
+  '@taskless/vale-win32-arm64@3.25.1-20261028215110':
+    resolution: {integrity: sha512-VEScaMSYLXBYTlq50Hqf+eft6W7m2hocFzaKS3OW3dFfp/dnSHt21Jy9q65bpZjx4+0UHHP0sY4kQi4KJFQeuw==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@taskless/vale-win32-x64@3.25.1-20261028215110':
+    resolution: {integrity: sha512-o8t0Q64r/E02I5PdAVNe0CE52ps19xL63nNSvu78Iu+h4AH5mKBXbaqbrwXqDejUyerEkOOfvBtC33E69pksrA==}
+    cpu: [x64]
+    os: [win32]
 
   '@types/debug@4.1.13':
     resolution: {integrity: sha512-KSVgmQmzMwPlmtljOomayoR89W4FynCAi3E8PPs7vmDVPe84hT+vGPKkJfThkmXs0x0jAaa9U8uW8bbfyS2fWw==}
@@ -350,6 +399,24 @@ snapshots:
       fastq: 1.20.3
 
   '@sindresorhus/merge-streams@4.0.0': {}
+
+  '@taskless/vale-darwin-arm64@3.25.1-20261028215110':
+    optional: true
+
+  '@taskless/vale-darwin-x64@3.25.1-20261028215110':
+    optional: true
+
+  '@taskless/vale-linux-arm64@3.25.1-20261028215110':
+    optional: true
+
+  '@taskless/vale-linux-x64@3.25.1-20261028215110':
+    optional: true
+
+  '@taskless/vale-win32-arm64@3.25.1-20261028215110':
+    optional: true
+
+  '@taskless/vale-win32-x64@3.25.1-20261028215110':
+    optional: true
 
   '@types/debug@4.1.13':
     dependencies:

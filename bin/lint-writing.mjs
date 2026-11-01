@@ -5,6 +5,7 @@ import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { valeBinary } from './vale.mjs';
 
 const args = process.argv.slice(2);
 if (args.length === 1 && args[0] === '--repo') {
@@ -19,7 +20,7 @@ if (args.length !== 1 || (args[0] !== '--stdin' && !['.md', '.txt'].includes(ext
 const require = createRequire(import.meta.url);
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const cli = join(dirname(require.resolve('writehuman/package.json')), 'dist/writehuman.js');
-const temp = mkdtempSync(join(tmpdir(), 'binbop-writing-'));
+const temp = mkdtempSync(join(tmpdir(), 'lint-writing-'));
 
 function run(command, commandArgs) {
   const result = spawnSync(command, commandArgs, { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024 });
@@ -33,9 +34,9 @@ try {
   const source = isStdin ? join(temp, 'draft.txt') : resolve(args[0]);
   if (isStdin) writeFileSync(source, readFileSync(0), { mode: 0o600 });
   const config = join(temp, '.vale.ini');
-  writeFileSync(config, `StylesPath = ${join(root, 'styles')}\nMinAlertLevel = suggestion\n\n[*.{md,txt}]\nBasedOnStyles = BinBop\n`, { mode: 0o600 });
+  writeFileSync(config, `StylesPath = ${join(root, 'styles')}\nMinAlertLevel = suggestion\n\n[*.{md,txt}]\nBasedOnStyles = Writing\n`, { mode: 0o600 });
 
-  const vale = run('mise', ['exec', 'vale@3.25.1', '--', 'vale', '--no-global', '--config', config, '--no-color', source]);
+  const vale = run(valeBinary(), [ '--no-global', '--config', config, '--no-color', source]);
   if (vale.stdout) process.stdout.write(vale.stdout);
   if (vale.stderr) process.stderr.write(vale.stderr);
   if (vale.status !== 0 && vale.status !== 1) throw new Error(`Vale failed (${vale.status}).`);

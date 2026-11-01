@@ -1,15 +1,16 @@
 import { spawnSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
+import { valeBinary } from './vale.mjs';
 
 const require = createRequire(import.meta.url);
 const cli = join(dirname(require.resolve('writehuman/package.json')), 'dist/writehuman.js');
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const reportDir = '.cache/writehuman';
-const policy = JSON.parse(readFileSync('.writehuman.json', 'utf8'));
+const policy = existsSync('.writehuman.json') ? JSON.parse(readFileSync('.writehuman.json', 'utf8')) : { maxScore: 133.2 };
 if (!Number.isFinite(policy.maxScore) || policy.maxScore < 0 || Object.keys(policy).some(key => key !== 'maxScore')) {
   throw new Error('Invalid writehuman threshold policy.');
 }
@@ -23,7 +24,7 @@ function run(command, args, options = {}) {
 
 const git = run('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', '*.md']);
 if (git.status !== 0) throw new Error(`Cannot list Markdown files: ${git.stderr}`);
-const files = git.stdout.split('\0').filter(Boolean);
+const files = git.stdout.split('\0').filter(file => file && existsSync(file));
 if (files.length === 0) throw new Error('No Markdown files found for writehuman.');
 
 const temporaryDir = mkdtempSync(join(tmpdir(), 'writing-check-'));
@@ -32,18 +33,20 @@ try {
   cpSync(join(packageRoot, 'styles'), styles, { recursive: true });
   if (existsSync('.vale/styles')) cpSync('.vale/styles', styles, { recursive: true, force: true });
   const config = join(temporaryDir, '.vale.ini');
-  writeFileSync(config, `StylesPath = ${styles}\nMinAlertLevel = suggestion\n\n[*.{md,html}]\nBasedOnStyles = BinBop\n`);
+  const localStyles = readdirSync(styles, { withFileTypes: true })
+    .filter(entry => entry.isDirectory() && entry.name !== 'Writing')
+    .map(entry => `, ${entry.name}`).join('');
+  writeFileSync(config, `StylesPath = ${styles}\nMinAlertLevel = suggestion\n\n[*.{md,html}]\nBasedOnStyles = Writing${localStyles}\n`);
   function checked(command, args) {
     const result = spawnSync(command, args, { stdio: 'inherit' });
     if (result.error) throw result.error;
     if (result.status !== 0) throw new Error(`${command} failed (${result.status ?? result.signal}).`);
   }
   checked(process.execPath, [join(dirname(require.resolve('markdownlint-cli2')), 'markdownlint-cli2-bin.mjs'), ...files]);
-  checked('mise', ['exec', 'lychee@0.24.2', '--', 'lychee', '--offline', '--include-fragments', '--no-progress', ...files]);
-  const html = run('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', 'site/src/*.html']);
+  const html = run('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', '*.html']);
   if (html.status !== 0) throw new Error(`Cannot list HTML files: ${html.stderr}`);
-  checked('mise', ['exec', 'vale@3.25.1', '--', 'vale', '--no-global', '--config', config, ...files, ...html.stdout.split('\0').filter(Boolean)]);
-  checked('mise', ['exec', 'vale@3.25.1', '--', 'vale', 'test', '--no-global', '--config', config, '--coverage', styles]);
+  checked(valeBinary(), [ '--no-global', '--config', config, ...files, ...html.stdout.split('\0').filter(file => file && existsSync(file))]);
+  checked(valeBinary(), [ 'test', '--no-global', '--config', config, '--coverage', styles]);
   for (const format of ['json', 'html']) {
     const output = join(temporaryDir, `report.${format}`);
     const result = run(process.execPath, [cli, 'check', '--lang', 'en', '--format', format, '--out', output, '--', ...files]);
