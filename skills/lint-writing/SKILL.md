@@ -1,10 +1,10 @@
 ---
 name: lint-writing
-description: Check writing for clarity, style, and common writing problems. Use when asked to lint or review text, or after drafting substantial text.
+description: Check writing with the writing linter. Use when asked to lint or review text, or after drafting substantial text.
 ---
 
-Run `writing check <file.md|file.txt>` to check a file, or pipe plain text to `writing check --stdin`. In a pnpm project, use `pnpm exec writing check` if needed. The checker requires Node and mise; if it cannot run, report that the check did not complete.
+1. Run `writing check <file.md|file.txt>`, or pipe plain text to `writing check --stdin`. Use `pnpm exec writing check` if the command is installed in the project.
+2. Review the findings and revise the text as appropriate, preserving its meaning and voice. Rerun the check after changes.
+3. Run any other checks required by the project.
 
-Review findings in context and revise as appropriate. Preserve meaning, facts, voice, and useful structure. A finding or score is a prompt to review, not proof that a passage is wrong. Do not change the meaning or make the writing worse to pass a check. If a required check cannot pass without doing so, report the failure and explain why.
-
-Follow the user's instructions and any applicable project guidance. Run other required checks separately. Do not claim that a check passed unless it ran successfully.
+The task is complete when the writing check and applicable project checks pass. If a check cannot run or cannot pass without harming the text, report the failure and why.
