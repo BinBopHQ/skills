@@ -1,6 +1,6 @@
 # Writing prototype
 
-This package provides a `writing` command and a writing skill. The command checks Markdown or plain text with Vale and writehuman. Both run locally. Install Node 22 or later, pnpm, and Vale 3.25.1, then run `pnpm install` in this directory.
+This package provides a `writing` command and a writing skill. The command checks Markdown or plain text with Vale and writehuman. Both run locally. Install Node 22 or later, pnpm, and mise, then run `pnpm install` in this directory. The command uses mise to run Vale 3.25.1.
 
 ```sh
 pnpm exec writing check path/to/draft.md

@@ -31,7 +31,7 @@ try {
   const config = join(temp, '.vale.ini');
   writeFileSync(config, `StylesPath = ${join(root, 'styles')}\nMinAlertLevel = suggestion\n\n[*.{md,txt}]\nBasedOnStyles = BinBop\n`, { mode: 0o600 });
 
-  const vale = run('vale', ['--no-global', '--config', config, '--no-color', source]);
+  const vale = run('mise', ['exec', 'vale@3.25.1', '--', 'vale', '--no-global', '--config', config, '--no-color', source]);
   if (vale.stdout) process.stdout.write(vale.stdout);
   if (vale.stderr) process.stderr.write(vale.stderr);
   if (vale.status !== 0 && vale.status !== 1) throw new Error(`Vale failed (${vale.status}).`);
