@@ -24,3 +24,9 @@ test('reports a missing file as a tool failure', () => {
   const result = check(['check', '/no-such-binbop-file.md']);
   assert.equal(result.status, 2);
 });
+
+test('does not apply marketplace terminology to general writing', () => {
+  const result = check(['check', '--stdin'], 'The auction lot has a lot number.\n');
+  assert.notEqual(result.status, 2, result.stderr);
+  assert.doesNotMatch(result.stdout, /BinBop\.ListingTerms|inventory reference/);
+});

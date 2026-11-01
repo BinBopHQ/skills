@@ -1,12 +1,10 @@
 ---
 name: lint-writing
-description: Check and revise writing for BinBop, including documentation, issues, messages, and email drafts. Use when asked to check writing or after drafting substantial text.
+description: Check writing for clarity, style, and common writing problems. Use when asked to lint or review text, or after drafting substantial text.
 ---
 
-Write for the reader and purpose. Be clear and specific. Preserve the author's meaning, facts, voice, and useful formatting.
+Run `writing check <file.md|file.txt>` to check a file, or pipe plain text to `writing check --stdin`. In a pnpm project, use `pnpm exec writing check` if needed. The checker requires Node and mise; if it cannot run, report that the check did not complete.
 
-Run `writing check <file>` or pipe a draft to `writing check --stdin`. In a pnpm project, use `pnpm exec writing` if the command is not on PATH. The tool needs Node and mise; report missing tools or failed checks rather than claiming success.
+Review findings in context and revise as appropriate. Preserve meaning, facts, voice, and useful structure. A finding or score is a prompt to review, not proof that a passage is wrong. Do not change the meaning or make the writing worse to pass a check. If a required check cannot pass without doing so, report the failure and explain why.
 
-Review the findings in context and make useful changes. Do not distort a fact or remove useful structure just to lower a score. If the threshold cannot be met without making the writing worse, explain the problem and leave the check failed.
-
-For repository changes, also run the repository's required checks. For messages and email, prepare a draft; do not send or post it unless separately instructed.
+Follow the user's instructions and any applicable project guidance. Run other required checks separately. Do not claim that a check passed unless it ran successfully.

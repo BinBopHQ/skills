@@ -1,6 +1,6 @@
 # Writing prototype
 
-This package provides a `writing` command and a `lint-writing` skill. The command checks Markdown or plain text with Vale and writehuman. Both run locally. Install Node 22 or later, pnpm, and mise, then run `pnpm install` in this directory. The command uses mise to run Vale 3.25.1.
+This package provides a `writing` command and a `lint-writing` skill. The command checks Markdown or plain text with Vale and writehuman. Both run locally. The skill explains how to use the checker and review its findings for any writing task. Install Node 22 or later, pnpm, and mise, then run `pnpm install` in this directory. The command uses mise to run Vale 3.25.1.
 
 ```sh
 node bin/writing.mjs check path/to/draft.md
@@ -11,4 +11,4 @@ printf 'A short draft.\n' | node bin/writing.mjs check --stdin
 
 When installed as a dependency, use `pnpm exec writing` instead of `node bin/writing.mjs`.
 
-This is a prototype. It does not yet replace the product repository's writing check, check HTML, or run Markdown formatting and link checks. The Vale rules here were copied from product for evaluation; consolidation is needed before using both in production.
+This is a prototype. It does not yet replace the product repository's writing check, check HTML, or run Markdown formatting and link checks. The general Vale rules here were copied from product for evaluation; consolidation is needed before using both in production. Product-specific rules belong with the product, not in this checker.
