@@ -46,6 +46,18 @@ try {
   const html = run('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', '*.html']);
   if (html.status !== 0) throw new Error(`Cannot list HTML files: ${html.stderr}`);
   checked(valeBinary(), [ '--no-global', '--config', config, ...files, ...html.stdout.split('\0').filter(file => file && existsSync(file))]);
+  const astro = run('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', '*.astro']);
+  if (astro.status !== 0) throw new Error(`Cannot list Astro files: ${astro.stderr}`);
+  for (const [index, file] of astro.stdout.split('\0').filter(file => file && existsSync(file)).entries()) {
+    // Astro frontmatter is JavaScript, not prose. Keep newlines for diagnostics.
+    const htmlFile = join(temporaryDir, `astro-${index}.html`);
+    const source = readFileSync(file, 'utf8').replace(/^---[ \t]*\r?\n[\s\S]*?\r?\n---[ \t]*(?=\r?\n|$)/, block => block.replace(/[^\r\n]/g, ' '));
+    writeFileSync(htmlFile, source, { mode: 0o600 });
+    const result = run(valeBinary(), ['--no-global', '--config', config, '--no-color', htmlFile]);
+    if (result.stdout) process.stdout.write(result.stdout.replaceAll(htmlFile, file));
+    if (result.stderr) process.stderr.write(result.stderr.replaceAll(htmlFile, file));
+    if (result.status !== 0) throw new Error(`Vale failed for ${file} (${result.status ?? result.signal}).`);
+  }
   checked(valeBinary(), [ 'test', '--no-global', '--config', config, '--coverage', styles]);
   for (const format of ['json', 'html']) {
     const output = join(temporaryDir, `report.${format}`);

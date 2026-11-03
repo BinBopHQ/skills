@@ -48,3 +48,23 @@ test('checks a repository without project configuration or mise', () => {
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test('checks Astro page text while ignoring frontmatter and scripts', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'lint-writing-astro-'));
+  try {
+    assert.equal(spawnSync('git', ['init', '-q', dir]).status, 0);
+    writeFileSync(join(dir, 'README.md'), '# Hello\n\nThanks for your help.\n');
+    const page = join(dir, 'page.astro');
+    writeFileSync(page, '---\nconst internal = "revolutionary";\n---\n<p>Thanks for your help.</p>\n<script>const text = "revolutionary";</script>\n');
+    const run = () => spawnSync(process.execPath, [cli.pathname, '--repo'], { cwd: dir, encoding: 'utf8' });
+    const clean = run();
+    assert.equal(clean.status, 0, clean.stderr);
+    writeFileSync(page, '---\nconst internal = "revolutionary";\n---\n<p>A revolutionary breakthrough.</p>\n');
+    const flagged = run();
+    assert.equal(flagged.status, 1, flagged.stderr);
+    assert.match(flagged.stdout, /page\.astro/);
+    assert.match(flagged.stdout, /Writing\.Hype/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
