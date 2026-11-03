@@ -10,7 +10,7 @@ Install Node.js and pnpm, then add the package with `pnpm add -D github:BinBopHQ
 
 The package includes Vale for macOS, Linux, and Windows on x64 and ARM64. Installing the skill alone does not install the package. The check fails on Vale errors or a writehuman score above 133.2; a repository may override that limit in `.writehuman.json`.
 
-The `handbook` repository describes BinBop's product and working practices, including Ready, Set, Go. Each repository's README and CONTRIBUTING.md explain its own purpose and how to work there.
+The `handbook` repository describes BinBop's product and working practices, including Ready, Set, Go! Each repository's README and CONTRIBUTING.md explain its own purpose and how to work there.
 
 ## Contributing
 

@@ -5,7 +5,7 @@ This repository holds reusable skills and supporting tools for work across BinBo
 ## Find the right context
 
 - BinBop repositories are normally sibling directories of this one. Find the relevant repository and read its README and CONTRIBUTING.md when useful.
-- Consult the `handbook` for shared product and working practices. Ready, Set, Go is a way to think about preparing for and doing work, not a requirement to add extra stages to every task.
+- Consult the `handbook` for shared product and working practices, including Ready, Set, Go! Use its questions to guide work without adding unnecessary ceremony. Don't move the finish line. If it changes, start over and get ready again.
 - Check for applicable repository-specific instructions. Keep reusable skills here; repository-specific instructions belong with the repository they describe.
 - If a required repository or tool is unavailable, say what is missing. Access to this repository does not imply access to its siblings.
 
